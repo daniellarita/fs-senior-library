@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from'react-redux';
-import { removeUser } from '../../redux/users'; 
-import { removeStory } from '../../redux/stories'; 
+import { removeUser } from '../../redux/users';
+import { removeStory } from '../../redux/stories';
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -20,7 +20,7 @@ class UserItem extends React.Component {
 				  	<img className="media-object img-circle" src={user.photo}/>
 				  </div>
 				  <Link className="media-body"
-				  			activeClassName="active" 
+				  			activeClassName="active"
 				  			to={`/users/${user.id}`}>
 				    <h4 className="media-heading tucked">
 				      <span placeholder="Jean Doe">{user.name}</span>
@@ -31,13 +31,13 @@ class UserItem extends React.Component {
 				    <h5 className="tucked">
 				      <span>{user.phone}</span>
 				    </h5>
-				  </Link> 
+				  </Link>
 				  <div className="media-right media-middle">
-						<button 
-								className="btn btn-default" 
+						{this.props.currentUser && this.props.currentUser.isAdmin && <button
+								className="btn btn-default"
 								onClick={this.removeUserCallback}>
 				  		<span className="glyphicon glyphicon-remove"></span>
-						</button>
+						</button>}
 					</div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@ class UserItem extends React.Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapState = ({ stories }) => ({ stories })
+const mapState = ({ stories, currentUser}) => ({ stories, currentUser })
 
 const mapDispatch = { removeUser, removeStory }
 

@@ -11,6 +11,7 @@ import StoryList from './components/Story/StoryList';
 import StoryDetail from './components/Story/StoryDetail';
 import { fetchUsers } from './redux/users';
 import { fetchStories } from './redux/stories';
+import { fetchMe } from './redux/auth';
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -38,6 +39,7 @@ const mapDispatch = dispatch => ({
  fetchInitialData: () => {
     dispatch(fetchUsers())
     dispatch(fetchStories())
+    dispatch(fetchMe())
     // what other data might we want to fetch on app load?
   }
 })

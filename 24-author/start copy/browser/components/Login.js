@@ -1,17 +1,19 @@
 import React from 'react';
 import { connect } from'react-redux';
 import { browserHistory } from 'react-router';
+import { login } from '../redux/auth';
 
 /* -----------------    COMPONENT     ------------------ */
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.onLoginSubmit = this.onLoginSubmit.bind(this);
   }
 
   render() {
+    console.log("LOGIN PROPS",this.props)
     const { message } = this.props;
     return (
       <div className="signin-container">
@@ -20,19 +22,19 @@ class Login extends React.Component {
                 <div className="form-group">
                   <label>email</label>
                   <input
-                    name="email" 
-                    type="email" 
-                    className="form-control" 
-                    required 
+                    name="email"
+                    type="email"
+                    className="form-control"
+                    required
                   />
                 </div>
                 <div className="form-group">
                     <label>password</label>
-                    <input 
+                    <input
                       name="password"
-                      type="password" 
-                      className="form-control" 
-                      required 
+                      type="password"
+                      className="form-control"
+                      required
                     />
                 </div>
                 <button type="submit" className="btn btn-block btn-primary">{message}</button>
@@ -60,13 +62,17 @@ class Login extends React.Component {
   onLoginSubmit(event) {
     const { message } = this.props;
     event.preventDefault();
-    console.log(`${message} isn't implemented yet`);
+    const credentials={
+      email:event.target.email.value,
+      password:event.target.password.value
+    };
+    this.props.login(credentials);
   }
 }
 
 /* -----------------    CONTAINER     ------------------ */
 
 const mapState = () => ({ message: 'Log in' })
-const mapDispatch = null
+const mapDispatch = { login: login };
 
 export default connect(mapState, mapDispatch)(Login);
